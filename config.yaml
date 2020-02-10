@@ -1,0 +1,5 @@
+options:
+  port:
+    type: int
+    default: 9103
+    description: The port on which telegraf is scraped by prometheus

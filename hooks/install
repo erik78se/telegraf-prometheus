@@ -1,0 +1,24 @@
+#!/bin/bash
+# Here do anything needed to install the service
+# i.e. apt-get install -y foo  or  bzr branch http://myserver/mycode /srv/webroot
+# Make sure this hook exits cleanly and is idempotent, common problems here are
+# failing to account for a debconf question on a dependency, or trying to pull
+# from github without installing git first.
+
+
+### Add a needed repo for telegraf
+cat <<EOF | tee /etc/yum.repos.d/influxdb.repo
+[influxdb]
+name = InfluxDB Repository - RHEL/CENTOS7
+baseurl = https://repos.influxdata.com/rhel/7/x86_64/stable/
+enabled = 1
+gpgcheck = 1
+gpgkey = https://repos.influxdata.com/influxdb.key
+EOF
+
+yum update
+yum -y install telegraf influxdb
+systemctl enable --now telegraf
+systemctl enable --now influxdb
+
+cp templates/telegraf.conf /etc/telegraf/telegraf.conf

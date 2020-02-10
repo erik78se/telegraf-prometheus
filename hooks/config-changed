@@ -1,0 +1,18 @@
+#!/bin/bash
+# config-changed occurs everytime a new configuration value is updated (juju set)
+
+port=$(config-get port)
+
+# remove opened ports
+for p in $(opened-ports | awk -F/ '{print $1}'); do
+  close-port $p/tcp
+done
+
+# open the port in the config
+open-port $port/tcp
+
+cp templates/telegraf.conf /etc/telegraf/telegraf.conf
+
+systemctl restart telegraf
+
+status-set active "Monitoring ${JUJU_PRINCIPAL_UNIT}"

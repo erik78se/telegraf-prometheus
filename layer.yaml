@@ -1,0 +1,4 @@
+includes:
+  - interface:http
+  - interface:juju-info
+repo: https://github.com/erik78se/telegraf-prometheus.git

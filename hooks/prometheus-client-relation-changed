@@ -1,0 +1,10 @@
+#!/bin/bash
+# This must be renamed to the name of the relation. The goal here is to
+# affect any change needed by relationships being formed, modified, or broken
+# This script should be idempotent.
+
+address=$(unit-get private-address)
+port=$(config-get port)
+
+relation-set hostname=$address
+relation-set port=$port
