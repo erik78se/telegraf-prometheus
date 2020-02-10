@@ -9,6 +9,9 @@ to prometheus2:target (interface: http)
 
 This deploys a centos7 node relates it to this charm for monitoring.
 <pre>
+# Deploy prometheus2
+juju deploy prometheus2
+
 # Deploy a bulk centos charm
 $ juju deploy cs:~erik-lonroth/tiny-bash-centos
 
@@ -18,8 +21,8 @@ $ juju deploy telegraf-prometheus
 # Relate the subordinate.
 $ juju relate telegraf-prometheus tiny-bash
 
-# Relate telegraf to prometheus
+# Relate telegraf to prometheus2
 $ juju relate prometheus2:target telegraf-prometheus:prometheus-client
 </pre>
 
-You should now be able to browse to your prometheus web and see the target.
+You should now be able to browse to your prometheus web and see the target in the web ui.
