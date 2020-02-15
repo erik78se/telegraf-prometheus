@@ -21,4 +21,5 @@ yum -y install telegraf influxdb
 systemctl enable --now telegraf
 systemctl enable --now influxdb
 
-cp templates/telegraf.conf /etc/telegraf/telegraf.conf
+# Render telegraf config
+render_telegraf

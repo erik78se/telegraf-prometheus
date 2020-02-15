@@ -1,5 +1,10 @@
 options:
-  port:
+  prometheus_client_listen_port:
     type: int
     default: 9103
-    description: The port on which telegraf is scraped by prometheus
+    description: The port on which telegraf is scraped by prometheus clients
+# TODO:
+#  listen_ip_range:
+#    type: string
+#    default: ""
+#    description: Space separated string of ip-networks for which to telegraf listens to.

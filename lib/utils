@@ -1,0 +1,32 @@
+# utils
+# Helper functions for bash charming with juju
+
+# A simple rendering function for bash
+
+function render () {
+    # Renders to stdout
+    local template=$1
+    if [ "" == "$template" ] ; then
+        echo "Missing arguments to bash function render, requires <template>"
+        exit 127
+     else
+        # subsitutes variables in a template file with environment variables.
+        # NOTE! The indentation here MUST be like this for this to work.
+        # DONT FIX INDENTATION BELOW
+eval "cat <<EOF
+$(<$template)
+EOF
+" 2> /dev/null
+    fi
+}
+
+# Render telegraf using configuration.
+function render_telegraf () {
+
+    prometheus_client_listen_port=$(config-get prometheus_client_listen_port)
+
+    juju-log -l 'INFO' "Rendering /etc/telegraf/telegraf.conf"
+
+    render templates/telegraf-minimal.conf > /etc/telegraf/telegraf.conf 2> /dev/null
+
+}
