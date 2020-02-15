@@ -10,7 +10,7 @@ telegraf-prometheus for centos7 monitors with telegraf.
 ## Telegraf plugins/config enabled
 The charm uses this template (which tells you which plugins are enabled):
 
-[telegraf-minimal.conf](templates/telegraf-minimal.conf)
+[telegraf-minimal.conf]
 
 If you need to change it, contribute to the code.
 
@@ -77,3 +77,4 @@ This charm does not have any functions/actions yet.
 [telegrapf-prometheus]: https://jaas.ai/telegraf-prometheus
 [tiny-bash-centos]: https://jaas.ai/u/erik-lonroth/tiny-bash-centos
 [interface: http]: https://github.com/juju-solutions/interface-http
+[telegraf-minimal.conf]: https://github.com/erik78se/telegraf-prometheus/blob/master/templates/telegraf-minimal.conf
