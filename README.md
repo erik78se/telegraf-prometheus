@@ -19,13 +19,15 @@ The charm allows for a single relation (:prometheus-client) with [prometheus]  (
 
 If you need more, contribute to the code.
 
-## Example deploy
+## Example deploy with prometheus2
 
 The below deploys a monitoring stack of:
  
 * A centos7 bash charm: [tiny-bash-centos]
     * This subordinate charm: [telegrapf-prometheus]
 * A prometheus charm: [prometheus]
+
+![Example Deployment](https://raw.githubusercontent.com/erik78se/telegraf-prometheus/master/example-deploy-with-prometheus.png)
 
 <pre>
 # Deploy prometheus2
@@ -78,3 +80,4 @@ This charm does not have any functions/actions yet.
 [tiny-bash-centos]: https://jaas.ai/u/erik-lonroth/tiny-bash-centos
 [interface: http]: https://github.com/juju-solutions/interface-http
 [telegraf-minimal.conf]: https://github.com/erik78se/telegraf-prometheus/blob/master/templates/telegraf-minimal.conf
+[example-deploy]: https://raw.githubusercontent.com/erik78se/telegraf-prometheus/master/example-deploy-with-prometheus.png
