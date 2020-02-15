@@ -7,7 +7,17 @@ telegraf-prometheus for centos7 monitors with telegraf.
 * If there is a nvidia-smi + kernel driver, its collecting gpu information per default. 
 (This check can be disabled with a charm config )
 
-The charm allows for a relation (:prometheus-client) with [prometheus]  (:target)
+## Telegraf plugins/config enabled
+The charm uses this template (which tells you which plugins are enabled):
+
+[telegraf-minimal.conf](templates/telegraf-minimal.conf)
+
+If you need to change it, contribute to the code.
+
+## Relations to other charms
+The charm allows for a single relation (:prometheus-client) with [prometheus]  (:target)
+
+If you need more, contribute to the code.
 
 ## Example deploy
 
@@ -32,6 +42,10 @@ $ juju relate telegraf-prometheus tiny-bash
 
 # Relate telegraf to prometheus2
 $ juju relate prometheus2:target telegraf-prometheus:prometheus-client
+
+# Expose prometheus
+$ juju expose prometheus2
+
 </pre>
 
 You should now be able to browse to your prometheus web and see the target in the web ui.
@@ -52,7 +66,7 @@ juju config telegraf-prometheus disable_nvidia_smi=true
 ## Operator actions/functions
 This charm does not have any functions/actions yet.
 
-# More work wanted (your contribution?)
+## More functionality wanted ?
 * Add more interfaces like the telegraf charm for ubuntu, like support for elastic-search etc.
 * Support other distros, such as ubuntu and centos8.
 
