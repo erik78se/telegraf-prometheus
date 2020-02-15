@@ -4,6 +4,8 @@ telegraf-prometheus for centos7 monitors with telegraf.
 
 * It adds in a [influxdata yum repo] repo to /etc/yum.repos.d/ which enables installation of telegraf and influxdb
 * Configures the listen port for prometheus-client and starts the services.
+* If there is a nvidia-smi + kernel driver, its collecting gpu information per default. 
+(This check can be disabled with a charm config )
 
 The charm allows for a relation (:prometheus-client) with [prometheus]  (:target)
 
@@ -40,6 +42,11 @@ You can also use the [prometheus] endpoint in [grafana] as a [DataSource] to get
 You can configure which port the telegraf serivice listen to which prometheus can scrape:
 <pre>
 juju config telegraf-prometheus port=9103
+</pre>
+
+You can disable checks with nvidia-smi if you need:
+<pre>
+juju config telegraf-prometheus disable_nvidia_smi=true
 </pre>
 
 ## Operator actions/functions

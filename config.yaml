@@ -3,6 +3,10 @@ options:
     type: int
     default: 9103
     description: The port on which telegraf is scraped by prometheus clients
+  disable_nvidia_smi:
+    type: boolean
+    default: false
+    description: "Disable nvidia-smi for harvesting GPU metrics"
 # TODO:
 #  listen_ip_range:
 #    type: string

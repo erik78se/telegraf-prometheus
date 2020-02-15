@@ -1,0 +1,19 @@
+# gpu-utils
+# functions for dealing with GPU
+
+
+function nvidia_smi_detect () {
+  # Looks for both nvidia kernel driver and nvidia-smi
+  if type nvidia-smi > /dev/null 2>&1 && modinfo nvidia > /dev/null 2>&1 ; then
+    return 0
+  else
+    return 1
+  fi
+}
+
+#
+#if [ nvidia_smi_detect ]; then
+#  echo Detected
+#else
+#  echo NotDetected
+#fi

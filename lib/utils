@@ -1,10 +1,9 @@
 # utils
-# Helper functions for bash charming with juju
 
-# A simple rendering function for bash
+source ./lib/gpu-utils
 
 function render () {
-    # Renders to stdout
+
     local template=$1
     if [ "" == "$template" ] ; then
         echo "Missing arguments to bash function render, requires <template>"
@@ -21,12 +20,33 @@ EOF
 }
 
 # Render telegraf using configuration.
+#   + Include nvidia-smi if possible
 function render_telegraf () {
 
-    prometheus_client_listen_port=$(config-get prometheus_client_listen_port)
+    #######################################################################
+    # If we use NVIDIA GPUs, and its not disabled in the charm config
+    # then, render a config with nvidia-smi plugin.
+    #######################################################################
 
-    juju-log -l 'INFO' "Rendering /etc/telegraf/telegraf.conf"
+    if nvidia_smi_detect && [ $(config-get disable_nvidia_smi) == "False" ]; then
 
-    render templates/telegraf-minimal.conf > /etc/telegraf/telegraf.conf 2> /dev/null
+        binary=$(type -P nvidia-smi) # gets the absolute path to the binary
+
+# Keep indentation below or this funtion will not work.
+# bash is indentation sensitive for some things.
+nvidia_smi_template_snippet="[[inputs.nvidia_smi]]
+  binary = $binary"
+
+        juju-log -l 'INFO' "Rendering /etc/telegraf/telegraf.conf"
+
+        prometheus_client_listen_port=$(config-get prometheus_client_listen_port)
+
+        render templates/telegraf-minimal.conf > /etc/telegraf/telegraf.conf 2> /dev/null
+
+    else
+
+        render templates/telegraf-minimal.conf > /etc/telegraf/telegraf.conf 2> /dev/null
+
+    fi
 
 }

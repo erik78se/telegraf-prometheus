@@ -5,6 +5,7 @@ source ./lib/utils
 
 # Render ...
 render_telegraf
+
 systemctl restart telegraf
 
 # Clear previously opened ports
